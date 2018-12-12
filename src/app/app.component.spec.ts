@@ -65,7 +65,7 @@ describe('AppComponent', () => {
     mockBackend.connections.subscribe(
       c => {
         expect(c.request.method).toEqual(RequestMethod.Delete);
-        expect(c.request.url).toEqual('https://gk-cooper-api.herokuapp.com/api/v1/auth/sing_out');
+        expect(c.request.url).toEqual('https://gk-cooper-api.herokuapp.com/api/v1/auth/sign_out');
       }
     );
     component.logout();

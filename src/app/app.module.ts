@@ -18,12 +18,12 @@ import { Angular2TokenService } from 'angular2-token';
   declarations: [
     MyApp,
     HomePage,
-    HttpModule,
-    RouterModule,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
+    RouterModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
