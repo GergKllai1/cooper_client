@@ -23,7 +23,7 @@ export class Page {
     element(by.css('.select')).click().then(() => {
       browser.sleep(500);
       element(by.cssContainingText('.button-inner', gender)).click();
-      element(by.cssContainaingText('.button-inner', 'OK')).click();
+      element(by.cssContainingText('.button-inner', 'OK')).click();
     });
 
     browser.sleep(500);

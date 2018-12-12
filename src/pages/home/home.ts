@@ -13,5 +13,4 @@ export class HomePage {
     calculate() {
       console.log(this.user);
   }
-
 }
