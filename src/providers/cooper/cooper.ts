@@ -9,7 +9,8 @@ export class CooperProvider {
   private ratings: any = [
     'Excellent',
     'Above average',
-    'Bellow average',
+    'Average',
+    'Below average',
     'Poor'
   ];
 

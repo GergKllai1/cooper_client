@@ -1,40 +1,42 @@
-import { CooperProvider } from './../../providers/cooper/cooper'
-import { PersonProvider } from './../../providers/person/person'
-import { TestBed, inject } from '@angular/core/testing'
+import { CooperProvider } from './../../providers/cooper/cooper';
+import { PersonProvider } from './../../providers/person/person';
+import { TestBed, inject } from "@angular/core/testing";
 
-describe('Person Component', () => {
+
+describe("Person Component", () => {
     let personProvider, cooperProvider;
 
-    beforeEach(() => TestBed.configureTestingModule({ 
-        providers: [personProvider, cooperProvider]
+    beforeEach(() => TestBed.configureTestingModule({
+        providers: [PersonProvider, CooperProvider]
     }));
 
-    beforeEach(inject([personProvider, cooperProvider], (p, c) => {
+    beforeEach(inject([PersonProvider, CooperProvider], (p, c) => {
         personProvider = p;
         cooperProvider = c;
     }));
 
-    it('should create the person provider', () => {
-        expect(personProvider).toBeTruthy();
-        expect(personProvider instanceof PersonProvider).toEqual(true);
-    });
-    
-    it('doAssessment should be defined', () => {
-        spyOn(personProvider, 'doAssessment');
-        personProvider.doAssessment(2500);
+        it("should create the person provider", () => {
+            expect(personProvider).toBeTruthy();
+            expect(personProvider instanceof PersonProvider).toEqual(true);
+        );
 
-        expect(personProvider.doAssessment).toHaveBeenCalled();
-        expect(personProvider.doAssessment).toHaveBeenCalledWith(2500);
-    });
+        it('doassessment should be defined', () => {
+            spyOn(personProvider, 'doAssessment');
 
-    it('cooper provider should be called', () => {
-        personProvider.age = 25;
-        personProvider.gender = 'female';
-        spyOn(cooperProvider, 'assess');
+            personProvider.doAssessment(2500);
 
-        personProvider.doAssessment(2200);
+            expect(personProvider.doAssessment).toHaveBeenCalled();
+            expect(personProvider.doAssessment).toHaveBeenCalledWith(2500);
+        });
 
-        expect(cooperProvider.assess).toHaveBeenCalled();
-        expect(cooperProvider.assess).toHaveBeenCalledWith(personProvider, 2200);
-    });
+        it('cooper provider should be called', () => {
+            personProvider.age = 25;
+            personProvider.gender = 'female';
+            spyOn(cooperProvider, 'assess');
+
+            personProvider.doAssessment(2200);
+
+            expect(cooperProvider.assess).toHaveBeenCalled();
+            expect(cooperProvider.assess).toHaveBeenCalledWith(personProvider, 2200);
+        });
 });
