@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 export class CooperProvider {
 
   constructor () {
-    console.log('Hello CooperProvider Provider');
   }
   private ratings: any = [
     'Excellent',
@@ -65,7 +64,7 @@ export class CooperProvider {
     if(ageRange == 'invalid range') {
       return 'Invalid age range';
     }
-
+    
     const distanceRanges = this.cooperTable[person.gender.toLowerCase()][ageRange];
 
     let ratingIndex: number;
