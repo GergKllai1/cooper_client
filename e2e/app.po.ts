@@ -16,10 +16,10 @@ export class Page {
 
   fillInForm(distance, gender, age) {
 
-    element(by.css('.text-input')).clear().then(() => {
+    /* element(by.css('.text-input')).clear().then(() => {
       element(by.css('.text-input')).sendKeys(distance);
-    });
-
+    }); */
+    
     element(by.css('.select')).click().then(() => {
       browser.sleep(500);
       element(by.cssContainingText('.button-inner', gender)).click();
