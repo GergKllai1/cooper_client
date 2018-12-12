@@ -12,9 +12,9 @@ describe('App', () => {
       page.navigateTo('/');
     });
 
-    it('should have a title saying Page One', () => {
-      page.getPageOneTitleText().then(title => {
-        expect(title).toEqual('Page One');
+    it('should have a title saying Ionic App', () => {
+      page.getTitle().then(title => {
+        expect(title).toEqual('Ionic App');
       });
     });
   })
