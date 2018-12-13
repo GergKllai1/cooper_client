@@ -12,7 +12,7 @@ export class ResultsPage {
   results = [];
   labels = [];
   data = [];
-  donoughtChartType: string = 'donought';
+  doughnutChartType: string = 'doughnut';
   radarChartType: string = 'radar';
 
   view: string = 'data';
@@ -51,5 +51,13 @@ export class ResultsPage {
       count += entry.data.message == value ? 1: 0;
     })
     return count;
+  }
+
+  chartClicked(event: any): void {
+    console.log(event);
+}
+
+  chartHovered(event: any): void {
+    console.log(event);
   }
 }
