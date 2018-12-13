@@ -1,3 +1,4 @@
+import { PerformanceDataProvider } from './../../providers/performance-data/performance-data';
 import { PersonProvider } from './../../providers/person/person';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -9,13 +10,14 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
   user: any = {};
-  constructor(public navCtrl: NavController, public person: PersonProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public person: PersonProvider, 
+    private alertCtrl: AlertController, private performanceData: PerformanceDataProvider ) {
     this.user = { distance: 1000, age: 20 };
     }
 
-      calculateOnly() {
-      if(this.user.gender === 'male' || this.user.gender === 'female') {
-        this.calculate()
+      calculateOnly(user) {
+      if(user.gender === 'male' || user.gender === 'female') {
+        this.calculate(user)
       } else {
         let alert = this.alertCtrl.create({
           title: 'Confirm gender',
@@ -25,11 +27,14 @@ export class HomePage {
         alert.present();
       }
     }
-    calculate() {
-      this.person.age = this.user.age;
-      this.person.gender = this.user.gender;
+    calculate(user) {
+      this.person.age = user.age;
+      this.person.gender = user.gender;
 
-      this.person.doAssessment(this.user.distance);
+      this.person.doAssessment(user.distance);
+      this.performanceData
+        .saveData({ performance_data: { data: { message: this.person.assessmentMessage } } })
+        .subscribe(data => console.log(data))
   }
 
 

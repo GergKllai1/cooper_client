@@ -118,7 +118,10 @@ export class MyApp {
     this._tokenService
       .registerAccount(credentials)
         .subscribe(
-          res => (console.log('success')),
+          res => {
+            debugger;
+            (this.currentUser = res.json().data)
+          },
           err => console.log('error')
         )
   }
