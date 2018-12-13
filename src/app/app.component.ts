@@ -50,15 +50,18 @@ export class MyApp {
       inputs: [
         {
           name: 'email',
-          placeholder: 'email'
+          placeholder: 'email',
+          type: 'email'
         },
         {
           name: 'password',
-          placeholder: 'password'
+          placeholder: 'password',
+          type: 'password'
         },
         {
           name: 'password confirmation',
-          placeholder: 'password confirmation'
+          placeholder: 'password confirmation',
+          type: 'password'
         }
       ],
       buttons:[
@@ -115,7 +118,7 @@ export class MyApp {
     this._tokenService
       .registerAccount(credentials)
         .subscribe(
-          res => console.log('success'),
+          res => (console.log('success')),
           err => console.log('error')
         )
   }
