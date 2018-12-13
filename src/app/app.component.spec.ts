@@ -16,7 +16,14 @@ describe('AppComponent', () => {
     email: 'test@test.com',
     password: 'password',
     userType: String
+  };
+  let signUpData = {
+    email: 'test@test.com',
+    password: 'password',
+    password_confirmation: 'password',
+    userType: String
   }
+
 
   beforeEach(() =>  {
     TestBed.configureTestingModule({
@@ -48,6 +55,18 @@ describe('AppComponent', () => {
     expect(component instanceof MyApp).toEqual(true);
   });
 
+  it('register method', inject([Angular2TokenService, MockBackend], (tokenService, mockBackend ) => {
+
+    mockBackend.connections.subscribe(
+      c => {
+        expect(c.request.getBody()).toEqual(JSON.stringify(signUpData));
+        expect(c.request.method).toEqual(RequestMethod.Post);
+        expect(c.request.url).toEqual('https://gk-cooper-api.herokuapp.com/api/v1/auth');
+      }
+    );
+    component.registration(signUpData);
+  }));
+
   it('login method', inject([Angular2TokenService, MockBackend], (tokenService, mockBackend ) => {
 
     mockBackend.connections.subscribe(
@@ -70,4 +89,5 @@ describe('AppComponent', () => {
     );
     component.logout();
   }));
+  
 });

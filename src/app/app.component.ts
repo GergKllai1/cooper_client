@@ -44,6 +44,41 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  registrationPopUp() {
+    let confirm = this.alertCtrl.create({
+      title: 'Register',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'email'
+        },
+        {
+          name: 'password',
+          placeholder: 'password'
+        },
+        {
+          name: 'password confirmation',
+          placeholder: 'password confirmation'
+        }
+      ],
+      buttons:[
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+          {
+            text: 'Register',
+            handler: data => {
+              this.registration(data);
+            }
+          }
+      ]
+    });
+    confirm.present()
+
+  }
   loginPopUp() {
     let confirm = this.alertCtrl.create({
       title: 'Login',
@@ -76,6 +111,14 @@ export class MyApp {
     confirm.present()
   }
 
+  registration(credentials) {
+    this._tokenService
+      .registerAccount(credentials)
+        .subscribe(
+          res => console.log('success'),
+          err => console.log('error')
+        )
+  }
   login(credentials) {
     this._tokenService
       .signIn(credentials)
