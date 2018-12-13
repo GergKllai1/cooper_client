@@ -1,8 +1,9 @@
+import { ResultsPage } from './../results/results';
 import { PerformanceDataProvider } from './../../providers/performance-data/performance-data';
 import { PersonProvider } from './../../providers/person/person';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -11,13 +12,14 @@ import { AlertController } from 'ionic-angular';
 export class HomePage {
   user: any = {};
   constructor(public navCtrl: NavController, public person: PersonProvider, 
-    private alertCtrl: AlertController, private performanceData: PerformanceDataProvider ) {
+    private alertCtrl: AlertController, private performanceData: PerformanceDataProvider,
+    private modalCtrl:  ModalController) {
     this.user = { distance: 1000, age: 20 };
     }
 
-      calculateOnly(user) {
-      if(user.gender === 'male' || user.gender === 'female') {
-        this.calculate(user)
+      calculateOnly() {
+      if(this.user.gender) {
+        this.calculate(this.user)
       } else {
         let alert = this.alertCtrl.create({
           title: 'Confirm gender',
@@ -36,6 +38,7 @@ export class HomePage {
         .saveData({ performance_data: { data: { message: this.person.assessmentMessage } } })
         .subscribe(data => console.log(data))
   }
-
-
+  showResults() {
+    this.modalCtrl.create(ResultsPage).present();
+  }
 }

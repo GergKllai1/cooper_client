@@ -14,11 +14,13 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { PerformanceDataProvider } from '../providers/performance-data/performance-data';
+import { ResultsPage } from '../pages/results/results';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    ResultsPage
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { PerformanceDataProvider } from '../providers/performance-data/performan
   entryComponents: [
     MyApp,
     HomePage,
+    ResultsPage
   ],
   providers: [
     StatusBar,
