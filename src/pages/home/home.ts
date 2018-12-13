@@ -1,7 +1,9 @@
+import { ResultsPage } from './../results/results';
+import { PerformanceDataProvider } from './../../providers/performance-data/performance-data';
 import { PersonProvider } from './../../providers/person/person';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -9,13 +11,15 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
   user: any = {};
-  constructor(public navCtrl: NavController, public person: PersonProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public person: PersonProvider, 
+    private alertCtrl: AlertController, private performanceData: PerformanceDataProvider,
+    private modalCtrl:  ModalController) {
     this.user = { distance: 1000, age: 20 };
     }
 
       calculateOnly() {
-      if(this.user.gender === 'male' || this.user.gender === 'female') {
-        this.calculate()
+      if(this.user.gender) {
+        this.calculate(this.user)
       } else {
         let alert = this.alertCtrl.create({
           title: 'Confirm gender',
@@ -25,12 +29,19 @@ export class HomePage {
         alert.present();
       }
     }
-    calculate() {
-      this.person.age = this.user.age;
-      this.person.gender = this.user.gender;
+    calculate(user) {
+      this.person.age = user.age;
+      this.person.gender = user.gender;
 
-      this.person.doAssessment(this.user.distance);
+      this.person.doAssessment(user.distance);
+  }
+  showResults() {
+    this.modalCtrl.create(ResultsPage).present();
   }
 
-
+  saveResults() {
+    this.performanceData
+        .saveData({ performance_data: { data: { message: this.person.assessmentMessage } } })
+        .subscribe(data => console.log(data))
+  }
 }
