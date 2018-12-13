@@ -34,11 +34,14 @@ export class HomePage {
       this.person.gender = user.gender;
 
       this.person.doAssessment(user.distance);
-      this.performanceData
-        .saveData({ performance_data: { data: { message: this.person.assessmentMessage } } })
-        .subscribe(data => console.log(data))
   }
   showResults() {
     this.modalCtrl.create(ResultsPage).present();
+  }
+
+  saveResults() {
+    this.performanceData
+        .saveData({ performance_data: { data: { message: this.person.assessmentMessage } } })
+        .subscribe(data => console.log(data))
   }
 }

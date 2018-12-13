@@ -20,5 +20,4 @@ export class ResultsPage {
       .getResults()
         .subscribe(data => (this.results = data.entries))
   }
-
 }
