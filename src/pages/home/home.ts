@@ -19,7 +19,7 @@ export class HomePage {
 
       calculateOnly() {
       if(this.user.gender) {
-        this.calculate(this.user)
+        this.calculate()
       } else {
         let alert = this.alertCtrl.create({
           title: 'Confirm gender',
@@ -29,11 +29,11 @@ export class HomePage {
         alert.present();
       }
     }
-    calculate(user) {
-      this.person.age = user.age;
-      this.person.gender = user.gender;
+    calculate() {
 
-      this.person.doAssessment(user.distance);
+      this.person.age = this.user.age;
+      this.person.gender = this.user.gender;
+      this.person.doAssessment(this.user.distance);
   }
   showResults() {
     this.modalCtrl.create(ResultsPage).present();

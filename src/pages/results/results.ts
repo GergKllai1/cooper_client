@@ -1,7 +1,6 @@
 import { PerformanceDataProvider } from './../../providers/performance-data/performance-data';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class ResultsPage {
   view: string = 'data';
 
   constructor(private perfomanceData: PerformanceDataProvider,
-    public navCtrl: NavController, public navParams: NavParams) {
+    public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
@@ -59,5 +58,9 @@ export class ResultsPage {
 
   chartHovered(event: any): void {
     console.log(event);
+  }
+
+  closeResults() {
+    this.viewCtrl.dismiss();
   }
 }
